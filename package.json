@@ -1,0 +1,33 @@
+{
+  "name": "pickme-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.23.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
+    "nodemailer": "^6.4.10",
+    "passport": "^0.4.1",
+    "pg": "^8.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PickMe-Bus/pickme-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PickMe-Bus/pickme-backend/issues"
+  },
+  "homepage": "https://github.com/PickMe-Bus/pickme-backend#readme"
+}
