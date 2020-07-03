@@ -41,7 +41,7 @@ router.post("/login", (req, res) => {
     .getUserBy(auth_user.email)
     .then((member) => {
       //   Get the user from the database and compare input password to hashed password
-      if (member && bcrypt.compareSync(auth_user.password, hashedPassword)) {
+      if (member && bcrypt.compareSync(auth_user.password, member.assword)) {
         console.log(member);
         //If the user exists and password is okay, a token should be generated
         const token = genToken(member);
