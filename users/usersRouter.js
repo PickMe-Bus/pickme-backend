@@ -1,28 +1,32 @@
-// Bring in the database configuration
-const userdb = require("../database/db-config");
+// Bring in express
+const express = require("express");
+// Bring in the helper functions from userDB.js
+const users = require("./usersDB");
+// Import the router
+const router = express.Router();
+// Bring in bcrypt
+const bcrypt = require("bcryptjs");
 
-// Create the helper functions for the user database
-module.exports = {
-  addUser,
-  getUserBy,
-  getUser,
-};
-
-function addUser({ email, first_name, last_name, password, is_admin }) {
-  // This is the SQL equivalent of INSERT INTO users(columns) VALUES(data to be added)
-  return userdb("users").insert({
+// Users endpoints here 👇👇👇
+// This is the register endpoint
+router.post("/register", (req, res) => {
+  const { email, first_name, last_name, password, is_admin } = req.body;
+  //   The password has to be hashed
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  //   Add a new user
+  const newUser = {
     email,
     first_name,
     last_name,
-    password,
+    password: hashedPassword,
     is_admin,
-  });
-}
-
-function getUserBy(email) {
-  return userdb("users").where({ email }).first();
-}
-
-function getUser() {
-  return userdb("users");
-}
+  };
+  users
+    .addUser(newUser)
+    .then((member) => {
+      res.status(201).json({ message: `Success`, newUser });
+    })
+    .catch((error) => {
+      error.status(500).json({ message: error.message, stack: error.stack });
+    });
+});
