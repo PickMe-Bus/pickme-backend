@@ -15,9 +15,7 @@ exports.up = function (knex) {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("bus")
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE");
+        .inTable("bus");
       table.string("origin", 255).notNullable();
       table.string("destination", 255).notNullable();
       table.date("trip_date").notNullable();
@@ -33,7 +31,6 @@ exports.up = function (knex) {
         .references("id")
         .inTable("trip")
         .onDelete("CASCADE")
-        .onUpdate("CASCADE");
       table
         .integer("user_id")
         .unsigned()
@@ -41,7 +38,6 @@ exports.up = function (knex) {
         .references("id")
         .inTable("users")
         .onDelete("CASCADE")
-        .onUpdate("CASCADE");
       table.date("created_on").defaultTo(knex.raw("CURRENT_DATE"));
     });
 };
