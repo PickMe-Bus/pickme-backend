@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 
 // Make the function for token generation and export it
-module.exports = function generateToken(auth) {
+module.exports = function generateToken(member) {
   // const payload = {
 
   // }

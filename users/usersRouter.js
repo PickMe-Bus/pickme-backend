@@ -6,6 +6,8 @@ const users = require("./usersDB");
 const router = express.Router();
 // Bring in bcrypt
 const bcrypt = require("bcryptjs");
+// Bring in the token generation function from the token folder
+const genToken = require("../auth/token");
 
 // Users endpoints here 👇👇👇
 // This is the register endpoint
@@ -31,6 +33,27 @@ router.post("/register", validateUser, (req, res) => {
     });
 });
 
+// This is the login endpoint
+router.post("/login", (req, res) => {
+  const auth_user = req.body;
+  // We need to first fish out the user from the db
+  users
+    .getUserBy(auth_user.email)
+    .then((member) => {
+      //   Get the user from the database and compare input password to hashed password
+      if (member && bcrypt.compareSync(auth_user.password, hashedPassword)) {
+        console.log(member);
+        //If the user exists and password is okay, a token should be generated
+        const token = genToken(member);
+        res.status(200).json({
+          message: `Login success, ${auth_user.first_name}`,
+          token,
+        });
+      }
+    })
+    .catch((error) => {});
+});
+
 // Middleware for validating user inputs
 function validateUser(req, res, next) {
   const addedUser = req.body;
@@ -50,3 +73,6 @@ function validateUser(req, res, next) {
     next();
   }
 }
+
+// Export the router to be seen by the server
+module.exports = router;
