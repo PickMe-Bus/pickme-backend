@@ -49,9 +49,16 @@ router.post("/login", (req, res) => {
           message: `Login success, ${auth_user.first_name}`,
           token,
         });
+      } else {
+        res.status(500).json({ message: `Credentials are not valid` });
       }
     })
-    .catch((error) => {});
+    .catch((error) => {
+      res.status(500).json({
+        message: `Error login in, check your details or register`,
+        stack: error.stack,
+      });
+    });
 });
 
 // Middleware for validating user inputs
