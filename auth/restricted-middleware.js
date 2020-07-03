@@ -4,6 +4,7 @@ const token = require("./token");
 // Restriction is needed to prevent unauthorized access to some part of the endpoint
 module.exports = (req, res, next) => {
   // Grab the token from req.authorization
+  const token = req.headers.authorization;
   const jwtSecrete = require("./secret").jwtSecret;
 
   if (token) {
