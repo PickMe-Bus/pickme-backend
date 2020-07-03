@@ -42,11 +42,12 @@ router.post("/login", (req, res) => {
     .then((member) => {
       //   Get the user from the database and compare input password to hashed password
       if (member && bcrypt.compareSync(auth_user.password, member.password)) {
-        console.log(member);
         //If the user exists and password is okay, a token should be generated
+        console.log(auth_user);
+        
         const token = genToken(member);
         res.status(200).json({
-          message: `Login success, ${auth_user.first_name}`,
+          message: `Login success, ${auth_user.email}`,
           token,
         });
       } else {
