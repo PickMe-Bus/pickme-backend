@@ -6,11 +6,15 @@ const helmet = require("helmet");
 // Create an instance of the server by invoking express
 const server = express();
 
+// Link the server and the router so that the endpoints can be accessed
+const userRouter = require("../users/usersRouter");
+
 // Make use of the pre-baked middleware
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(logger);
+server.use("/user", userRouter);
 
 // Flesh out a dummy API
 server.get("/", (req, res) => {
