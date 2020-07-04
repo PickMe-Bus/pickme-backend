@@ -11,6 +11,6 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  // The down function destroys the user table if it exists. It allows us to move to any state of the database.
+  // The down function destroys the users table if it exists. It allows us to move to any state of the database.
   return knex.schema.dropTableIfExists("users");
 };
