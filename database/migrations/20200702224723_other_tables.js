@@ -15,7 +15,8 @@ exports.up = function (knex) {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("bus");
+        .inTable("bus")
+        .onDelete("CASCADE");
       table.string("origin", 255).notNullable();
       table.string("destination", 255).notNullable();
       table.date("trip_date").notNullable();
@@ -23,7 +24,7 @@ exports.up = function (knex) {
       table.float("status").defaultTo(1);
     })
     .createTable("booking", (table) => {
-      table.primary(["trip_id", "user_id"]);       //Spec wanted compositte key. This is composite, but how to consume it?
+      table.increments("id");    //Spec wanted compositte key. This is composite, but how to consume it?
       table
         .integer("trip_id")
         .unsigned()

@@ -6,6 +6,7 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('trip').insert([
         {
+          id: 1,
           bus_id: 2,
           origin: "Obalende",
           destination: "Ikorodu",
@@ -14,6 +15,7 @@ exports.seed = function(knex) {
           status: 1
         },
         {
+          id: 2,
           bus_id: 1,
           origin: "Obalende",
           destination: "Ikorodu",
@@ -22,6 +24,7 @@ exports.seed = function(knex) {
           status: 1
         },
         {
+          id: 3,
           bus_id: 3,
           origin: "V.I",
           destination: "Lekki",
