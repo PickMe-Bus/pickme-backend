@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 
+const tripsRouter = require("../trips");
+
 // Create an instance of the server by invoking express
 const server = express();
 
@@ -12,7 +14,8 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 
-// Flesh out a dummy API
+server.use("/api/v1/trips", tripsRouter);
+
 server.get("/", (req, res) => {
   res.send("<h2>Welcome to pick-me</h2>");
 });
