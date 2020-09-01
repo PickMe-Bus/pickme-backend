@@ -13,7 +13,8 @@ module.exports = (req, res, next) => {
         res.status(401).json({ you: "you shall not pass" });
       } else {
         // We attach the decoded token to the request
-        req.decodedToken = decodedToken;
+        // req.decodedToken = decodedToken;
+        res.locals.is_admin = decodedToken.is_admin
         console.log("decoded token", decodedToken);
         next();
       }

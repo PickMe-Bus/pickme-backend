@@ -29,7 +29,7 @@ router.post("/register", validateUser, (req, res) => {
       res.status(201).json({ message: `Success`, newUser });
     })
     .catch((error) => {
-      error.status(500).json({ message: error.message, stack: error.stack });
+      res.status(500).json({ message: error.message, stack: error.stack });
     });
 });
 
